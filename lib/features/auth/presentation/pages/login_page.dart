@@ -7,6 +7,7 @@ import 'package:flutter_intern_task/features/auth/presentation/bloc/auth_event.d
 import 'package:flutter_intern_task/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter_intern_task/features/auth/presentation/widgets/auth_button.dart';
 import 'package:flutter_intern_task/features/auth/presentation/widgets/auth_text_field.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
@@ -29,8 +30,8 @@ class _LoginPageState extends State<LoginPage> {
         }
 
         if (state is AuthSuccess) {
-          // go home page
           snackbar(context, 'Login Successful');
+          context.go('/projects');
         }
       },
       child: Scaffold(

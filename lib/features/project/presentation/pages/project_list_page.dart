@@ -26,29 +26,32 @@ class _ProjectListPageState extends State<ProjectListPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Projects")),
 
-      body: BlocBuilder<ProjectBloc, ProjectState>(
-        builder: (context, state) {
-          if (state is ProjectLoading) {
-            return const Loader();
-          }
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: BlocBuilder<ProjectBloc, ProjectState>(
+          builder: (context, state) {
+            if (state is ProjectLoading) {
+              return const Loader();
+            }
 
-          if (state is ProjectLoadedSuccessfully) {
-            return ListView.builder(
-              itemCount: state.projects.length,
-              itemBuilder: (context, index) {
-                final project = state.projects[index];
+            if (state is ProjectLoadedSuccessfully) {
+              return ListView.builder(
+                itemCount: state.projects.length,
+                itemBuilder: (context, index) {
+                  final project = state.projects[index];
 
-                return ProjectCard(project: project, onTap: () {});
-              },
-            );
-          }
+                  return ProjectCard(project: project, onTap: () {});
+                },
+              );
+            }
 
-          if (state is ProjectError) {
-            return Center(child: Text(state.message));
-          }
+            if (state is ProjectError) {
+              return Center(child: Text(state.message));
+            }
 
-          return const SizedBox();
-        },
+            return const SizedBox();
+          },
+        ),
       ),
     );
   }
