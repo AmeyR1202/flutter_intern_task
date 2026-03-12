@@ -18,7 +18,6 @@ class _ProjectListPageState extends State<ProjectListPage> {
   @override
   void initState() {
     super.initState();
-
     context.read<ProjectBloc>().add(FetchProjects());
   }
 
