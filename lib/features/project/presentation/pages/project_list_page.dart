@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_intern_task/core/theme/app_colors.dart';
 import 'package:flutter_intern_task/core/widgets/loader.dart';
 import '../bloc/project_bloc.dart';
 import '../bloc/project_event.dart';
@@ -24,7 +25,11 @@ class _ProjectListPageState extends State<ProjectListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Projects")),
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        title: const Text("Projects"),
+        backgroundColor: AppColors.background,
+      ),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
