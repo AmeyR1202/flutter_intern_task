@@ -164,6 +164,6 @@ flutter run
 
 ## Demo
 
-A short **5–10 minute Loom video** explaining the implementation is provided along with the repository submission.
+A short **Loom video** explaining the implementation is provided along with the repository submission.
 
-loom link :
+loom link : https://www.loom.com/share/817961418b3641d08bc20e7f80361118
