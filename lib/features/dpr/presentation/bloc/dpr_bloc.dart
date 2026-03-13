@@ -12,41 +12,41 @@ class DprBloc extends Bloc<DprEvent, DprState> {
   }
 
   Future<void> _onSubmit(SubmitDpr event, Emitter<DprState> emit) async {
-    if (event.projectId == null) {
-      emit(DprFailure("Please select a project"));
-      return;
-    }
-
-    if (event.date == null) {
-      emit(DprFailure("Please select a date"));
-      return;
-    }
-
-    if (event.weather == null) {
-      emit(DprFailure("Please select weather"));
-      return;
-    }
-
-    if (event.description.trim().isEmpty) {
-      emit(DprFailure("Enter work description"));
-      return;
-    }
-
-    final workers = int.tryParse(event.workerCount);
-
-    if (workers == null || workers <= 0) {
-      emit(DprFailure("Enter valid worker count"));
-      return;
-    }
-
-    if (event.images.isEmpty) {
-      emit(DprFailure("Upload at least one photo"));
-      return;
-    }
-
-    emit(DprSubmitting());
-
     try {
+      if (event.projectId == null) {
+        emit(DprFailure("Please select a project"));
+        return;
+      }
+
+      if (event.date == null) {
+        emit(DprFailure("Please select a date"));
+        return;
+      }
+
+      if (event.weather == null) {
+        emit(DprFailure("Please select weather"));
+        return;
+      }
+
+      if (event.description.trim().isEmpty) {
+        emit(DprFailure("Enter work description"));
+        return;
+      }
+
+      final workers = int.tryParse(event.workerCount);
+
+      if (workers == null || workers <= 0) {
+        emit(DprFailure("Enter valid worker count"));
+        return;
+      }
+
+      if (event.images.isEmpty) {
+        emit(DprFailure("Upload at least one photo"));
+        return;
+      }
+
+      emit(DprSubmitting());
+
       final dpr = DprEntity(
         projectId: event.projectId!,
         date: event.date!,
@@ -56,11 +56,14 @@ class DprBloc extends Bloc<DprEvent, DprState> {
         images: event.images,
       );
 
-      await submitDprUsecase(dpr);
+      final result = await submitDprUsecase(dpr);
 
-      emit(DprSuccess());
+      result.fold(
+        (failure) => emit(DprFailure(failure.message)),
+        (_) => emit(DprSuccess()),
+      );
     } catch (e) {
-      emit(DprFailure("Failed to submit DPR"));
+      emit(DprFailure("Unexpected error occurred"));
     }
   }
 }

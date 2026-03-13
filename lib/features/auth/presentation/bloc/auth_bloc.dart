@@ -10,15 +10,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginRequested>(_onLoginRequested);
   }
 
-  void _onLoginRequested(LoginRequested event, Emitter<AuthState> emit) async {
+  Future<void> _onLoginRequested(
+    LoginRequested event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
-      await loginUsecase(event.email, event.password);
+      final result = await loginUsecase(event.email, event.password);
 
-      emit(AuthSuccess());
+      result.fold(
+        (failure) => emit(AuthFailure(failure.message)),
+        (user) => emit(AuthSuccess()),
+      );
     } catch (e) {
-      emit(AuthFailure("Invalid email or password"));
+      emit(AuthFailure("Unexpected error occurred"));
     }
   }
 }

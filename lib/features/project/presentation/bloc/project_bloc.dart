@@ -16,9 +16,12 @@ class ProjectBloc extends Bloc<ProjectEvent, ProjectState> {
     emit(ProjectLoading());
     try {
       final projects = await getProjectUsecase();
-      emit(ProjectLoadedSuccessfully(projects));
+      projects.fold(
+        (failure) => emit(ProjectError(failure.message)),
+        (projects) => emit(ProjectLoadedSuccessfully(projects)),
+      );
     } catch (e) {
-      emit(ProjectError("Failed to load projects"));
+      emit(ProjectError("Unexpected error occurred"));
     }
   }
 }
