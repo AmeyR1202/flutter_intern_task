@@ -1,4 +1,5 @@
 import 'package:flutter_intern_task/features/auth/presentation/pages/login_page.dart';
+import 'package:flutter_intern_task/features/dpr/presentation/pages/dpr_form_page.dart';
 import 'package:flutter_intern_task/features/project/presentation/pages/project_list_page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,6 +11,17 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: "/projects",
       builder: (context, state) => const ProjectListPage(),
+    ),
+    GoRoute(
+      path: "/dpr",
+      builder: (context, state) {
+        final data = state.extra as Map;
+
+        return DprFormPage(
+          project: data["project"],
+          projects: data["projects"],
+        );
+      },
     ),
   ],
 );

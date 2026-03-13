@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_intern_task/core/theme/app_colors.dart';
 import 'package:flutter_intern_task/core/widgets/loader.dart';
+import 'package:go_router/go_router.dart';
 import '../bloc/project_bloc.dart';
 import '../bloc/project_event.dart';
 import '../bloc/project_state.dart';
@@ -44,7 +45,15 @@ class _ProjectListPageState extends State<ProjectListPage> {
                 itemBuilder: (context, index) {
                   final project = state.projects[index];
 
-                  return ProjectCard(project: project, onTap: () {});
+                  return ProjectCard(
+                    project: project,
+                    onTap: () {
+                      context.push(
+                        "/dpr",
+                        extra: {"project": project, "projects": state.projects},
+                      );
+                    },
+                  );
                 },
               );
             }

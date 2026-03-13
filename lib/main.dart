@@ -5,6 +5,10 @@ import 'package:flutter_intern_task/features/auth/data/datasources/auth_local_da
 import 'package:flutter_intern_task/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:flutter_intern_task/features/auth/domain/usecases/login_usecase.dart';
 import 'package:flutter_intern_task/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_intern_task/features/dpr/data/datasources/dpr_local_datasource.dart';
+import 'package:flutter_intern_task/features/dpr/data/repository/dpr_repository_impl.dart';
+import 'package:flutter_intern_task/features/dpr/domain/usecases/submit_dpr_usecase.dart';
+import 'package:flutter_intern_task/features/dpr/presentation/bloc/dpr_bloc.dart';
 import 'package:flutter_intern_task/features/project/data/datasources/project_local_datasources.dart';
 import 'package:flutter_intern_task/features/project/data/repository/project_repository_impl.dart';
 import 'package:flutter_intern_task/features/project/domain/usecases/get_project_usecase.dart';
@@ -29,6 +33,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => ProjectBloc(
             GetProjectUsecase(ProjectRepositoryImpl(ProjectLocalDatasources())),
+          ),
+        ),
+        BlocProvider(
+          create: (_) => DprBloc(
+            SubmitDprUsecase(DprRepositoryImpl(DprLocalDatasource())),
           ),
         ),
       ],
