@@ -8,4 +8,5 @@ class AppColors {
   static const inputBackground = Colors.white;
   static const textWhite = Colors.white;
   static const backgroundWhite = Colors.white;
+  static const borderColor = Colors.black;
 }
