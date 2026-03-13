@@ -4,6 +4,12 @@ A simple Flutter application implementing **Login, Project List, and DPR Submiss
 
 ---
 
+## DEMO VIDEO LINK
+
+A short **Loom video** explaining the implementation is provided along with the repository submission.
+
+Loom link : https://www.loom.com/share/817961418b3641d08bc20e7f80361118
+
 ## Tech Stack
 
 - **Flutter** (3.43.0)
@@ -161,9 +167,3 @@ flutter run
 - Project list is **mocked/static data**.
 
 ---
-
-## Demo
-
-A short **Loom video** explaining the implementation is provided along with the repository submission.
-
-loom link : https://www.loom.com/share/817961418b3641d08bc20e7f80361118
